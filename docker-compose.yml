@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  
+  php:
+    container_name: php
+    ports:
+      # local:container
+      - "8000:8000"
+    environment: 
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+      #- COMPOSER_ALLOW_SUPERUSER=1
+    volumes:
+      - ./php/vhosts:/etc/apache2/sites-enabled
+      - ./:/var/www
+    networks:
+      - dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+   
+networks:
+    dev:
+
+volumes:
+    db-data:
